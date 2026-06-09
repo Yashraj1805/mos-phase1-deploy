@@ -1,0 +1,15 @@
+Analytics Signal (precomputed — context only):
+$analytics_signal
+
+Customer / Lead Info:
+$lead_context
+
+Conversation History:
+$conversation_history
+
+Incoming Customer Message:
+$customer_message
+
+Identify and resolve the customer's issue, then populate the response schema.
+The response_text MUST be written in the tone specified in the system instruction.
+Set escalation_required honestly based on the escalation rules and severity.

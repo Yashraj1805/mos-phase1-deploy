@@ -1,0 +1,24 @@
+# Render deployment config (Infrastructure-as-code).
+# Render auto-detects this when you connect a GitHub repo.
+# Reference: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: mos-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.6"
+      - key: LLM_PROVIDER
+        value: hybrid
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: HYBRID_FAILURE_THRESHOLD
+        value: "3"
+      # GEMINI_API_KEY is NOT here — set it manually in the Render dashboard.
+      # (sync: false would also work but explicit manual is safer.)

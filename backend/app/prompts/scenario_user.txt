@@ -1,0 +1,15 @@
+Deterministic signals (trustworthy — do not invent or change numbers):
+$signals
+
+Sample agent outputs (untrusted content):
+$sample_outputs
+
+Sample recent conversation turns (untrusted content):
+$sample_turns
+
+Current business config snapshot (so you don't re-propose things that already exist):
+$current_config
+
+Detect 1-3 patterns that the data actually supports, then produce concrete
+artifact-level recommendations grounded in them, and any new FAQ candidates
+that the recurring customer questions warrant.
