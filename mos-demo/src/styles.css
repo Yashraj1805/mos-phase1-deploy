@@ -42,3 +42,67 @@ code, .mono { font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace; 
 .pulse { animation: pulse 1.5s ease-in-out infinite; }
 .dot { display: inline-block; animation: blink 1.4s infinite; color: var(--muted2); font-size: 18px; line-height: 0; }
 .dot:nth-child(2) { animation-delay: .2s; } .dot:nth-child(3) { animation-delay: .4s; }
+
+/* ─────────── Responsive ─────────── */
+
+/* Tablet — tighten main padding */
+@media (max-width: 1024px) {
+  .app-main { padding: 22px 18px 50px !important; }
+}
+
+/* Mobile — sidebar becomes top bar, multi-col → single col */
+@media (max-width: 768px) {
+  body { overflow-x: hidden !important; }
+
+  .app-shell { flex-direction: column !important; }
+
+  .app-sidebar {
+    width: 100% !important;
+    height: auto !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    padding: 10px 12px !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 50 !important;
+    gap: 10px !important;
+    overflow-x: auto !important;
+  }
+  .app-sidebar > div:first-child { margin-bottom: 0 !important; flex-shrink: 0; padding-left: 0 !important; }
+  .app-sidebar nav {
+    flex-direction: row !important;
+    flex: 1 !important;
+    gap: 6px !important;
+  }
+  .app-sidebar nav button {
+    padding: 8px 10px !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
+  }
+  .app-sidebar-secondary { display: none !important; }
+
+  .app-main {
+    padding: 14px 12px 40px !important;
+    max-width: 100% !important;
+  }
+
+  /* Force multi-column inline grids to stack */
+  .responsive-cols-3,
+  .responsive-cols-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Wide table-style grids: horizontal scroll */
+  .wide-table-wrap {
+    overflow-x: auto !important;
+  }
+  .wide-table-wrap > div { min-width: 720px; }
+}
+
+/* Very small phones */
+@media (max-width: 420px) {
+  .app-main { padding: 12px 10px 40px !important; }
+  .app-sidebar nav button { font-size: 11px !important; padding: 7px 8px !important; }
+}

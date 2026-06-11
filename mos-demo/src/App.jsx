@@ -972,7 +972,7 @@ function AnalyticsHighlightCard({ lead, isActive }) {
   }[an?.urgency] || "var(--muted)";
 
   return (
-    <div style={{ background: isActive ? "color-mix(in srgb, var(--analytics) 4%, var(--surface))" : "var(--surface)",
+    <div className="responsive-cols-3" style={{ background: isActive ? "color-mix(in srgb, var(--analytics) 4%, var(--surface))" : "var(--surface)",
       border: isActive ? "1.5px solid color-mix(in srgb, var(--analytics) 40%, transparent)" : "1px solid var(--border)",
       borderRadius: 14, padding: 16, display: "grid",
       gridTemplateColumns: "minmax(0, 1fr) auto minmax(0, 1.3fr)", gap: 16, alignItems: "stretch",
@@ -1847,7 +1847,7 @@ function FlowDemoPage({ report, refresh, logEvent }) {
           </div>
 
           {/* Charts: donut + funnel side by side */}
-          <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1.2fr)", gap: 12, marginBottom: 14 }}>
+          <div className="responsive-cols-2" style={{ display: "grid", gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1.2fr)", gap: 12, marginBottom: 14 }}>
             <div style={{ background: "var(--surface)", border: "1px solid var(--border)",
               borderRadius: 12, padding: 18 }}>
               <div style={{ fontSize: 11, fontWeight: 700, color: "var(--muted)", letterSpacing: 0.8,
@@ -1910,7 +1910,7 @@ function FlowDemoPage({ report, refresh, logEvent }) {
           )}
 
           <SectionHeader n="5" title="Lead status dashboard · session view" />
-          <div style={{ background: "var(--surface)", border: "1px solid var(--border)",
+          <div className="wide-table-wrap" style={{ background: "var(--surface)", border: "1px solid var(--border)",
             borderRadius: 12, overflow: "hidden", marginBottom: 24 }}>
             <div style={{ display: "grid",
               gridTemplateColumns: "50px 1fr 130px 90px 130px 130px 1fr",
@@ -2185,7 +2185,7 @@ function AnalyticsPage({ refresh, logEvent }) {
           <div style={{ fontSize: 11, fontWeight: 700, color: "var(--muted)", letterSpacing: 0.8, textTransform: "uppercase", marginBottom: 12 }}>Recent classifications</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {history.slice(1).map((h, i) => (
-              <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 80px 130px 130px", gap: 12, padding: "9px 14px", background: "var(--surface2)", border: "1px solid var(--border-soft)", borderRadius: 8, fontSize: 12.5 }}>
+              <div key={i} className="responsive-cols-3" style={{ display: "grid", gridTemplateColumns: "1fr 80px 130px 130px", gap: 12, padding: "9px 14px", background: "var(--surface2)", border: "1px solid var(--border-soft)", borderRadius: 8, fontSize: 12.5 }}>
                 <span style={{ color: "var(--text)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>"{h.msg}"</span>
                 <span style={{ color: h.analytics?.category === "hot_lead" ? "var(--good)" : h.analytics?.category === "spam" ? "var(--bad)" : "var(--router)", fontWeight: 600 }}>{h.analytics?.score}</span>
                 <span style={{ color: "var(--muted)" }}>{h.analytics?.category}</span>
@@ -2407,7 +2407,7 @@ function ScenarioPage({ logEvent }) {
 // ─────────── Sidebar ───────────
 function Sidebar({ active, setActive, status, errorMsg, events }) {
   return (
-    <aside style={{
+    <aside className="app-sidebar" style={{
       width: 240, background: "var(--surface)", borderRight: "1px solid var(--border)",
       display: "flex", flexDirection: "column", padding: "20px 14px", position: "sticky", top: 0,
       height: "100vh", flexShrink: 0,
@@ -2444,7 +2444,7 @@ function Sidebar({ active, setActive, status, errorMsg, events }) {
       </nav>
 
       {/* Connection */}
-      <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid var(--border)" }}>
+      <div className="app-sidebar-secondary" style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid var(--border)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10, paddingLeft: 6 }}>
           <span className="pulse" style={{ width: 7, height: 7, borderRadius: "50%", background: status === "error" ? "var(--bad)" : "var(--good)" }} />
           <span style={{ fontSize: 11, color: status === "error" ? "#FCA5A5" : "var(--muted)" }} className="mono">
@@ -2458,7 +2458,7 @@ function Sidebar({ active, setActive, status, errorMsg, events }) {
 
       {/* Mini activity log */}
       {events.length > 0 && (
-        <div style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--border)" }}>
+        <div className="app-sidebar-secondary" style={{ marginTop: 14, paddingTop: 14, borderTop: "1px solid var(--border)" }}>
           <div style={{ fontSize: 10, color: "var(--muted2)", letterSpacing: 0.8, textTransform: "uppercase", fontWeight: 600, paddingLeft: 6, marginBottom: 8 }}>recent calls</div>
           <div style={{ display: "flex", flexDirection: "column", gap: 4, maxHeight: 140, overflowY: "auto" }}>
             {events.slice(0, 6).map((e, i) => {
@@ -2509,9 +2509,9 @@ export default function App() {
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, [page]);
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div className="app-shell" style={{ display: "flex", minHeight: "100vh" }}>
       <Sidebar active={page} setActive={setPage} status={status} errorMsg={errorMsg} events={events} />
-      <main style={{ flex: 1, padding: "28px 36px 60px", maxWidth: 1200, margin: "0 auto", width: "100%" }}>
+      <main className="app-main" style={{ flex: 1, padding: "28px 36px 60px", maxWidth: 1200, margin: "0 auto", width: "100%" }}>
         {status === "error" && (
           <div style={{ background: "color-mix(in srgb, var(--bad) 12%, transparent)", border: "1px solid color-mix(in srgb, var(--bad) 25%, transparent)", color: "#FCA5A5", padding: "10px 14px", borderRadius: 8, fontSize: 13, marginBottom: 18 }}>
             Backend not reachable at <span className="mono" style={{ color: "var(--text)" }}>{API_BASE}</span>. Start it with <span className="mono" style={{ color: "var(--text)" }}>uvicorn app.main:app --port 8765</span>.
